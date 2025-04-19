@@ -1,6 +1,24 @@
 group 'com.liudonghua.system_network_proxy'
 version '1.0-SNAPSHOT'
 
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    // Added this block:
+    afterEvaluate { project ->
+        if (project.hasProperty("kotlin")) {
+            project.tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+                kotlinOptions {
+                    jvmTarget = "1.8"
+                }
+            }
+        }
+    }
+}
+
 buildscript {
     ext.kotlin_version = '1.5.20'
     repositories {
